@@ -81,7 +81,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-        }
+
+			if(Input.GetKey(KeyCode.C)) {
+				transform.position = new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z);
+				m_WalkSpeed = 2.0f;
+			} else {
+				m_WalkSpeed = 5.0f;
+			}
+		}
 
 
         private void PlayLandingSound()
