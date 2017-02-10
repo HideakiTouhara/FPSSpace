@@ -42,6 +42,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+		float squatHeight;
+		float squatSpeed;
+		float normalSpeed;
+
         // Use this for initialization
         private void Start()
         {
@@ -55,6 +59,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+			squatHeight = 4.3f;
+			squatSpeed = 2.0f;
+			normalSpeed = 5.0f;
         }
 
 
@@ -81,7 +89,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
-        }
+
+			if(Input.GetKey(KeyCode.C)) {
+				transform.position = new Vector3(transform.position.x, squatHeight, transform.position.z);
+				m_WalkSpeed = squatSpeed;
+			} else {
+				m_WalkSpeed = normalSpeed;
+			}
+		}
 
 
         private void PlayLandingSound()
