@@ -7,6 +7,7 @@ public class ShotController : MonoBehaviour {
 	int bullet = 30;
 	int bulletBox = 150;
 	float shotInterval = 0.0f;
+	public float coolTime = 1.0f;
 
 	public GameObject sparkle;
 	public GameObject gunPoint;
@@ -21,7 +22,7 @@ public class ShotController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonDown(0) && shotInterval > 1.0f) {
+		if(Input.GetMouseButtonDown(0) && shotInterval > coolTime) {
 			shotInterval = 0;
 			Ray ray = new Ray(transform.position, transform.forward);
 			RaycastHit hit;
