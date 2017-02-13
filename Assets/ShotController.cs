@@ -7,7 +7,7 @@ public class ShotController : MonoBehaviour {
 	int bullet = 30;
 	int bulletBox = 150;
 	float shotInterval = 0.0f;
-	public float coolTime = 1.0f;
+	[SerializeField] private float coolTime = 1.0f;
 
 	public GameObject sparkle;
 	public GameObject gunPoint;
