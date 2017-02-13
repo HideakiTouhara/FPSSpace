@@ -59,7 +59,5 @@ public class ShotController : MonoBehaviour {
 				bullet += bulletBox;
 			}
 		}
-		print("bullet" + bullet);
-		print("bulletBox" + bulletBox);
 	}
 }
