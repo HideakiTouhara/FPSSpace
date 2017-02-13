@@ -27,7 +27,7 @@ public class ShotController : MonoBehaviour {
 			RaycastHit hit;
 			GameObject sparkele3 = Instantiate(sparkle);
 			sparkele3.transform.position = gunPoint.transform.position;
-			sparkele3.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+			sparkele3.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
 			Destroy(sparkele3, 0.1f);
 			audioSource.PlayOneShot(audioClip);
 			bullet -= 1;
