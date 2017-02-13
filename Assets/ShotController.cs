@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ShotController : MonoBehaviour {
 
-	int bullet = 30;
-	int bulletBox = 150;
+	[SerializeField] private int bullet = 30;
+	[SerializeField] private int bulletBox = 150;
 	float shotInterval = 0.0f;
 	[SerializeField] private float coolTime = 1.0f;
 
 	public GameObject sparkle;
 	public GameObject gunPoint;
 	AudioSource audioSource;
-	public AudioClip audioClip;
+	[SerializeField] private AudioClip audioClip;
+	[SerializeField] private AudioClip reloadSound;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +40,26 @@ public class ShotController : MonoBehaviour {
 			}
 		}
 		shotInterval += Time.deltaTime;
+
+		if(Input.GetKeyDown(KeyCode.R)) {
+			Reload();
+		}
 		
+	}
+
+	void Reload() {
+		if(bullet < 30 && bulletBox > 0) {
+			int bulletDiff = 30 - bullet;
+			audioSource.PlayOneShot(reloadSound);
+			if(bulletBox > bulletDiff) {
+				bulletBox -= bulletDiff;
+				bullet += bulletDiff;
+			} else {
+				bulletBox = 0;
+				bullet += bulletBox;
+			}
+		}
+		print("bullet" + bullet);
+		print("bulletBox" + bulletBox);
 	}
 }
