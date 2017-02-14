@@ -7,16 +7,24 @@ public class ShotController : MonoBehaviour {
 	[SerializeField] private int bullet = 30;
 	[SerializeField] private int bulletBox = 150;
 	float shotInterval = 0.0f;
-	[SerializeField] private float coolTime = 1.0f;
+	[SerializeField] private float coolTime = 0.1f;
+	[SerializeField] private int startTargetLife = 5;
+	int targetLife;
 
 	public GameObject sparkle;
 	public GameObject gunPoint;
 	AudioSource audioSource;
 	[SerializeField] private AudioClip audioClip;
 	[SerializeField] private AudioClip reloadSound;
+	[SerializeField] private TargetController targetController;
+
+	[SerializeField] private GameObject headMarker;
+	int score = 0;
+
 
 	// Use this for initialization
 	void Start () {
+		targetLife = startTargetLife;
 		audioSource = GetComponent<AudioSource>();
 		
 	}
@@ -37,6 +45,15 @@ public class ShotController : MonoBehaviour {
 				GameObject sparkele2 = Instantiate(sparkle);
 				sparkele2.transform.position = hit.point;
 				Destroy(sparkele2, 0.1f);
+
+				if(hit.collider.name == "pCube1" || hit.collider.name == "pCylinder1") {
+					targetLife -= 1;
+					CalcScore(hit.point);
+				}
+				if(targetLife == 0) {
+					targetController.brokenTarget();
+					targetLife = startTargetLife;
+				}
 			}
 		}
 		shotInterval += Time.deltaTime;
@@ -59,5 +76,17 @@ public class ShotController : MonoBehaviour {
 				bullet += bulletBox;
 			}
 		}
+	}
+
+	void CalcScore(Vector3 hitPoint) {
+		float diff = (headMarker.transform.position - hitPoint).magnitude;
+		if(diff <= 0.3f) {
+			score = 100;
+		} else if(diff <= 0.5f) {
+			score = 50;
+		} else {
+			score = 30;
+		}
+		print("score:" + score);
 	}
 }
