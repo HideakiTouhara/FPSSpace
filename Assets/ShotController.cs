@@ -87,6 +87,5 @@ public class ShotController : MonoBehaviour {
 		} else {
 			score = 30;
 		}
-		print("score:" + score);
 	}
 }
