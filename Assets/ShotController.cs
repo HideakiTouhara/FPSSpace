@@ -43,7 +43,7 @@ public class ShotController : MonoBehaviour {
 			bullet -= 1;
 			if(Physics.Raycast(ray, out hit) && bullet != 0) {
 				GameObject sparkele2 = Instantiate(sparkle);
-				sparkele2.transform.position = hit.point;
+				sparkele2.transform.position = hit.point + new Vector3(0, 0, -0.3f);
 				Destroy(sparkele2, 0.1f);
 
 				if(hit.collider.name == "pCube1" || hit.collider.name == "pCylinder1") {
