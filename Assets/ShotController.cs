@@ -26,11 +26,11 @@ public class ShotController : MonoBehaviour {
 	void Start () {
 		targetLife = startTargetLife;
 		audioSource = GetComponent<AudioSource>();
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 		if(Input.GetMouseButtonDown(0) && shotInterval > coolTime) {
 			shotInterval = 0;
 			Ray ray = new Ray(transform.position, transform.forward);
