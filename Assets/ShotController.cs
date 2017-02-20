@@ -84,11 +84,11 @@ public class ShotController : MonoBehaviour {
 	void CalcScore(Vector3 hitPoint) {
 		float diff = (headMarker.transform.position - hitPoint).magnitude;
 		if(diff <= 0.3f) {
-			score = 100;
+			score += 100;
 		} else if(diff <= 0.5f) {
-			score = 50;
+			score += 50;
 		} else {
-			score = 30;
+			score += 30;
 		}
 	}
 }
