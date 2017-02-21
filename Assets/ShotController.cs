@@ -23,8 +23,7 @@ public class ShotController : MonoBehaviour {
 	public int score = 0;
 
 	[SerializeField] GameObject snipe;
-	bool snipeMode = false;
-	float snipeDistance = 5.0f;
+	bool isSnipe = false;
 
 
 	// Use this for initialization
@@ -70,15 +69,14 @@ public class ShotController : MonoBehaviour {
 		}
 
 		if(Input.GetMouseButtonDown(1)) {
-			if(snipeMode == false) {
-				transform.localPosition += new Vector3(0, 0, snipeDistance);
+			if(isSnipe == false) {
+				GetComponent<Camera>().fieldOfView = 30.0f;
 				snipe.SetActive(true);
-				snipeMode = true;
+				isSnipe = true;
 			} else {
-				transform.localPosition -= new Vector3(0, 0, snipeDistance);
 				GetComponent<Camera>().fieldOfView = 64.4f;
 				snipe.SetActive(false);
-				snipeMode = false;
+				isSnipe = false;
 			}
 		}
 	}
