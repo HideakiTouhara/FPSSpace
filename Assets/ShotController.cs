@@ -76,6 +76,7 @@ public class ShotController : MonoBehaviour {
 				snipeMode = true;
 			} else {
 				transform.localPosition -= new Vector3(0, 0, snipeDistance);
+				GetComponent<Camera>().fieldOfView = 64.4f;
 				snipe.SetActive(false);
 				snipeMode = false;
 			}
