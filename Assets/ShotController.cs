@@ -22,6 +22,10 @@ public class ShotController : MonoBehaviour {
 	[SerializeField] private GameObject headMarker;
 	public int score = 0;
 
+	[SerializeField] GameObject snipe;
+	bool snipeMode = false;
+	float snipeDistance = 5.0f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -64,7 +68,18 @@ public class ShotController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R)) {
 			Reload();
 		}
-		
+
+		if(Input.GetMouseButtonDown(1)) {
+			if(snipeMode == false) {
+				transform.localPosition += new Vector3(0, 0, snipeDistance);
+				snipe.SetActive(true);
+				snipeMode = true;
+			} else {
+				transform.localPosition -= new Vector3(0, 0, snipeDistance);
+				snipe.SetActive(false);
+				snipeMode = false;
+			}
+		}
 	}
 
 	void Reload() {
