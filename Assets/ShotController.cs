@@ -24,6 +24,7 @@ public class ShotController : MonoBehaviour {
 
 	[SerializeField] GameObject snipe;
 	bool isSnipe = false;
+	Camera camerafv;
 
 
 	// Use this for initialization
@@ -31,6 +32,7 @@ public class ShotController : MonoBehaviour {
 		targetLife = startTargetLife;
 		audioSource = GetComponent<AudioSource>();
 		bullet = startBullet;
+		camerafv = GetComponent<Camera>();
 	}
 	
 	// Update is called once per frame
@@ -70,11 +72,11 @@ public class ShotController : MonoBehaviour {
 
 		if(Input.GetMouseButtonDown(1)) {
 			if(isSnipe == false) {
-				GetComponent<Camera>().fieldOfView = 30.0f;
+				camerafv.fieldOfView = 30.0f;
 				snipe.SetActive(true);
 				isSnipe = true;
 			} else {
-				GetComponent<Camera>().fieldOfView = 64.4f;
+				camerafv.fieldOfView = 64.4f;
 				snipe.SetActive(false);
 				isSnipe = false;
 			}
