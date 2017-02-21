@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShotController : MonoBehaviour {
 
-	[SerializeField] private int bullet = 30;
-	[SerializeField] private int bulletBox = 150;
+	public int startBullet = 30;
+	public int bullet;
+	public int bulletBox = 150;
 	float shotInterval = 0.0f;
 	[SerializeField] private float coolTime = 0.1f;
 	[SerializeField] private int startTargetLife = 5;
@@ -19,13 +20,14 @@ public class ShotController : MonoBehaviour {
 	[SerializeField] private TargetController targetController;
 
 	[SerializeField] private GameObject headMarker;
-	int score = 0;
+	public int score = 0;
 
 
 	// Use this for initialization
 	void Start () {
 		targetLife = startTargetLife;
 		audioSource = GetComponent<AudioSource>();
+		bullet = startBullet;
 	}
 	
 	// Update is called once per frame
@@ -66,8 +68,8 @@ public class ShotController : MonoBehaviour {
 	}
 
 	void Reload() {
-		if(bullet < 30 && bulletBox > 0) {
-			int bulletDiff = 30 - bullet;
+		if(bullet < startBullet && bulletBox > 0) {
+			int bulletDiff = startBullet - bullet;
 			audioSource.PlayOneShot(reloadSound);
 			if(bulletBox > bulletDiff) {
 				bulletBox -= bulletDiff;
@@ -82,11 +84,11 @@ public class ShotController : MonoBehaviour {
 	void CalcScore(Vector3 hitPoint) {
 		float diff = (headMarker.transform.position - hitPoint).magnitude;
 		if(diff <= 0.3f) {
-			score = 100;
+			score += 100;
 		} else if(diff <= 0.5f) {
-			score = 50;
+			score += 50;
 		} else {
-			score = 30;
+			score += 30;
 		}
 	}
 }
