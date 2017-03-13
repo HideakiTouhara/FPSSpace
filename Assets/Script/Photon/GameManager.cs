@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	[SerializeField] ConnectionManager _connectionManager;
+	public ConnectionManager ConnectionManager {get {return _connectionManager;}}
+
+	void Start () 
+	{
+		DontDestroyOnLoad(gameObject);
+	}
+
+	public void LoadScene(Const.Scene scene)
+	{
+		SceneManager.LoadScene(scene.ToString());
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }
