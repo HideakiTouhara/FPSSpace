@@ -1,16 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Const : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
+﻿public static partial class Const 
+{
+	public enum Scene
+	{
+		Matching,
+		testscene
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public enum ConnectionState
+	{
+		NotYet,
+		Master,
+		Lobby,
+		Room
+	}
+
+	public enum PlayerState
+	{
+		Live,
+		Dead
 	}
 }
