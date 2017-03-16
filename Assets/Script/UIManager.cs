@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
 	[SerializeField] private Text bullet;
 	[SerializeField] private Text bulletBox;
 
-	[SerializeField] ShotController shotController;
+	[SerializeField] PlayerController playerController;
 	[SerializeField] float remainingTime = 100.0f;
 
 	// Use this for initialization
@@ -24,9 +24,9 @@ public class UIManager : MonoBehaviour {
 		remainingTime -= Time.deltaTime;
 		string remainingTime2 = remainingTime.ToString("F1");
 		time.text = "Time: " + remainingTime2 + "s";
-		pt.text = "Pt: " + shotController.score;
-		bullet.text = "Bullet: " + shotController.bullet + "/" + shotController.startBullet;
-		bulletBox.text = "BulletBox: " + shotController.bulletBox;
+		pt.text = "Pt: " + playerController.score;
+		bullet.text = "Bullet: " + playerController.bullet + "/" + playerController.startBullet;
+		bulletBox.text = "BulletBox: " + playerController.bulletBox;
 		
 	}
 }
