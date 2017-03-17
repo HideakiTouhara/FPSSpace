@@ -22761,6 +22761,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114972812479854952, guid: b44d2f170c6454274a70e0a1bb7b0e5b,
+        type: 2}
+      propertyPath: resPawnPoint.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4302225203298950, guid: b44d2f170c6454274a70e0a1bb7b0e5b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 201.192
@@ -22867,6 +22872,21 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114972812479854952, guid: b44d2f170c6454274a70e0a1bb7b0e5b,
+        type: 2}
+      propertyPath: resPawnPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 1579272082}
+    - target: {fileID: 114972812479854952, guid: b44d2f170c6454274a70e0a1bb7b0e5b,
+        type: 2}
+      propertyPath: resPawnPoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 414613041}
+    - target: {fileID: 114972812479854952, guid: b44d2f170c6454274a70e0a1bb7b0e5b,
+        type: 2}
+      propertyPath: resPawnPoint.Array.data[2]
+      value: 
+      objectReference: {fileID: 2009934415}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b44d2f170c6454274a70e0a1bb7b0e5b, type: 2}
   m_IsPrefabParent: 0
@@ -25834,7 +25854,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400192, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1622421762}
-  m_LocalRotation: {x: 0.6122276, y: -0.36693394, z: -0.59888977, w: -0.3631361}
+  m_LocalRotation: {x: 0.6122277, y: -0.36693397, z: -0.5988898, w: -0.36313614}
   m_LocalPosition: {x: -6.393426, y: 1.3832966, z: 2.7329824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

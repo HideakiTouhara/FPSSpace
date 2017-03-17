@@ -12,8 +12,7 @@ public class ConnectionManager : Photon.PunBehaviour
 	[SerializeField]
 	private RoomInfoPanel roomInfoPanel;
 
-	[SerializeField]
-	private Const.ConnectionState state;
+	[SerializeField] private Const.ConnectionState state;
 	public Const.ConnectionState ConnectionState
 	{
 		get{return state;}
@@ -26,7 +25,6 @@ public class ConnectionManager : Photon.PunBehaviour
 		instance = this;
 		PhotonNetwork.automaticallySyncScene = true;
 		PhotonNetwork.ConnectUsingSettings("0.1");
-		
 	}
 	
 	public override void OnConnectedToMaster()
@@ -45,18 +43,15 @@ public class ConnectionManager : Photon.PunBehaviour
 	public override void OnReceivedRoomListUpdate()
 	{
 		rooms = PhotonNetwork.GetRoomList();
-		foreach(var r in rooms)
-		{
+		foreach(var r in rooms) {
 			string log =
 				"RoomName" + r.name
 				+ "userName" + r.customProperties["userName"]
 				+ "userId" + r.customProperties["userId"];
 			Debug.Log(log);
 		}
-		if(rooms.Length == 0)
-			Debug.Log("no rooms");
-		else
-			roomSelectUI.UpdateUIList(rooms);
+		if(rooms.Length == 0) Debug.Log("no rooms");
+		else roomSelectUI.UpdateUIList(rooms);
 	}
 
 	public void CreateRoom(string roomName)
