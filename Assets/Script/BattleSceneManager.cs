@@ -19,7 +19,7 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 		var hash = PhotonNetwork.room.customProperties;
 		if(hash.ContainsKey(standbyedCountKey)) 
 		{
-			int currentReadyCount = (int)hash(standbyedCountKey);
+			int currentReadyCount = (int)hash[standbyedCountKey];
 			entryOrder = currentReadyCount;
 			currentReadyCount += 1;
 			hash[standbyedCountKey] = currentReadyCount;
@@ -54,7 +54,7 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 	private void CreateCharacter()
 	{
 		GameObject character = PhotonNetwork.Instantiate("FPSController", spawnPoints[entryOrder].position, spawnPoints[entryOrder].rotation, 0);
-		character.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController().enabled = true;
-		character.GetComponentInChildren<AudioListener>().enabled = true;
+//		character.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController().enabled = true;
+//		character.GetComponentInChildren<AudioListener>().enabled = true;
 	}
 }
