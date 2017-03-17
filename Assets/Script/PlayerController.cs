@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : Photon.MonoBehaviour {
 
 	public int startBullet = 30;
 	public int bullet;
@@ -25,6 +25,15 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] GameObject snipe;
 	bool isSnipe = false;
 	[SerializeField] private Camera camerafv;
+
+	[SerializeField] private UnityStandardAssets.Characters
+		.FirstPerson.FirstPersonController firstPersonController;
+	private Const.PlayerState playerState = Const.PlayerState.Live;
+
+	public int hitPoint = 100;
+	private int hitPointFull = 100;
+
+	[SerializeField] private GameObject[] resPawnPoint;
 
 
 	// Use this for initialization
@@ -60,6 +69,14 @@ public class PlayerController : MonoBehaviour {
 				if(targetLife == 0) {
 					targetController.brokenTarget();
 					targetLife = startTargetLife;
+				}
+				if(hit.transform.tag == "Player") {
+					var myView = GetComponent<PhotonView>();
+					var otherView = hit.transform.GetComponent<PhotonView>();
+					int damage = 20;
+					if(otherView.ownerId == PhotonNetwork.player.ID) {
+						otherView.RPC("ReceiveDamage", PhotonPlayer.Find(otherView.ownerId), damage);
+					}
 				}
 			}
 		}
@@ -105,5 +122,21 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			score += 30;
 		}
+	}
+
+	[PunRPC]
+	void ReceiveDamage(int damage) {
+		hitPoint -= damage;
+		UIManager.instance.ReceiveDamage();
+		if(hitPoint < 0) {
+			print("Dead");
+			Respawn();
+		}
+	}
+
+	private void Respawn() {
+		hitPoint = hitPointFull;
+		transform.position = resPawnPoint[Random.Range(0, 3)].transform.position;
+		transform.rotation = resPawnPoint[Random.Range(0, 3)].transform.rotation;
 	}
 }
