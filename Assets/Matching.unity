@@ -1111,7 +1111,7 @@ MonoBehaviour:
   roomNameField: {fileID: 1350178576}
   createRoomButton: {fileID: 687509994}
   roomInfoPanel: {fileID: 0}
-  roomSelectCellPrefab: {fileID: 1052857178705632, guid: cb8c42d9c67354fd9bd1087642510c3f,
+  roomSelectCellPrefab: {fileID: 1404450532636558, guid: e5ab49a60e31f4e8e98e985c71c3c85a,
     type: 2}
   scrollPanel: {fileID: 1799596753}
 --- !u!1 &1159431828
