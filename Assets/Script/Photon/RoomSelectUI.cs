@@ -53,7 +53,7 @@ public class RoomSelectUI : MonoBehaviour {
 		foreach(var r in rooms)
 		{
 			var obj = Instantiate(roomSelectCellPrefab) as GameObject;
-			obj.transform.SetParent(scrollPanel);
+			obj.transform.SetParentWithReset(scrollPanel);
 			var cell = obj.GetComponent<RoomSelectCell>();
 			cell.SetValue(r);
 			cells.Add(cell);
