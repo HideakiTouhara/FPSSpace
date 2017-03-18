@@ -7,7 +7,10 @@ public class RoomSelectUI : MonoBehaviour {
 
 	[SerializeField] private ConnectionManager connectionManager
 	{
-		get{return GameManager.instance.ConnectionManager;}
+	    get
+	    {
+	        return GameManager.instance.ConnectionManager;
+	    }
 	}
 	[SerializeField] private Text connectionStateLabel;
 	[SerializeField] private InputField roomNameField;
