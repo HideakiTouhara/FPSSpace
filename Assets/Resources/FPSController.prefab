@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 114541050220677948}
   - component: {fileID: 114972812479854952}
   - component: {fileID: 114268391437388162}
+  - component: {fileID: 136657917158861544}
   m_Layer: 0
   m_Name: FPSController
   m_TagString: Player
@@ -1125,6 +1126,19 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1421643620552846}
   m_Enabled: 1
+--- !u!136 &136657917158861544
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1453624756778256}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0.4, y: 0.5, z: 0}
 --- !u!143 &143870103338634476
 CharacterController:
   m_ObjectHideFlags: 1

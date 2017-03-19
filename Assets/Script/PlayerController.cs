@@ -75,9 +75,7 @@ public class PlayerController : Photon.MonoBehaviour {
 	                    var otherView = hit.transform.GetComponent<PhotonView>();
 	                    int damage = 20;
 	                    if (otherView.ownerId == myView.ownerId) return;
-	                    if(otherView.ownerId == PhotonNetwork.player.ID) {
-	                        print(PhotonNetwork.player.ID);
-	                        print(otherView.ownerId);
+	                    if(myView.ownerId == PhotonNetwork.player.ID) {
 	                        otherView.RPC("ReceiveDamage", PhotonPlayer.Find(otherView.ownerId), damage);
 	                    }
 	                }
@@ -139,13 +137,13 @@ public class PlayerController : Photon.MonoBehaviour {
 		hitPoint -= damage;
 	    print(hitPoint);
 //		UIManager.instance.ReceiveDamage();
-		if(hitPoint < 0) {
+		if(hitPoint <= 0) {
 			print("Dead");
-			Respawn();
 		}
 	}
 
-	private void Respawn() {
+	private void Respawn()
+	{
 		hitPoint = hitPointFull;
 		transform.position = resPawnPoint[Random.Range(0, 3)].transform.position;
 		transform.rotation = resPawnPoint[Random.Range(0, 3)].transform.rotation;
