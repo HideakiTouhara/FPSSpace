@@ -46,7 +46,7 @@ public class PlayerController : Photon.MonoBehaviour {
 	void Update () {
 	    if (photonView.isMine)
 	    {
-	        if(Input.GetMouseButtonDown(0) && shotInterval > coolTime) {
+	        if(Input.GetMouseButtonDown(0) && shotInterval > coolTime && bullet > 0) {
 	            shotInterval = 0;
 	            Ray ray = new Ray(camerafv.transform.position, camerafv.transform.forward);
 	            RaycastHit hit;
@@ -74,7 +74,10 @@ public class PlayerController : Photon.MonoBehaviour {
 	                    var myView = GetComponent<PhotonView>();
 	                    var otherView = hit.transform.GetComponent<PhotonView>();
 	                    int damage = 20;
+	                    if (otherView.ownerId == myView.ownerId) return;
 	                    if(otherView.ownerId == PhotonNetwork.player.ID) {
+	                        print(PhotonNetwork.player.ID);
+	                        print(otherView.ownerId);
 	                        otherView.RPC("ReceiveDamage", PhotonPlayer.Find(otherView.ownerId), damage);
 	                    }
 	                }
