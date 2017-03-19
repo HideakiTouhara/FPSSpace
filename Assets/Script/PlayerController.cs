@@ -64,7 +64,7 @@ public class PlayerController : Photon.MonoBehaviour {
 
 	                if(hit.collider.name == "pCube1" || hit.collider.name == "pCylinder1") {
 	                    targetLife -= 1;
-	                    CalcScore(hit.point);
+//	                    CalcScore(hit.point);
 	                }
 	                if(targetLife == 0) {
 	                    targetController.brokenTarget();
