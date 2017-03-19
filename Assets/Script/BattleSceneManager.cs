@@ -64,6 +64,6 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 		character.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 		character.GetComponentInChildren<AudioListener>().enabled = true;
 	    var playerController = character.GetComponent<PlayerController>();
-	    playerController.CameraStart();
+	    playerController.SetUpAsMyPlayer();
 	}
 }

@@ -100,9 +100,10 @@ public class PlayerController : Photon.MonoBehaviour {
 	    }
 	}
 
-    public void CameraStart()
+    public void SetUpAsMyPlayer()
     {
         camerafv.enabled = true;
+        UIManager.instance.SetMyPlayer(this);
     }
 
 	void Reload() {
@@ -133,7 +134,8 @@ public class PlayerController : Photon.MonoBehaviour {
 	[PunRPC]
 	void ReceiveDamage(int damage) {
 		hitPoint -= damage;
-		UIManager.instance.ReceiveDamage();
+	    print(hitPoint);
+//		UIManager.instance.ReceiveDamage();
 		if(hitPoint < 0) {
 			print("Dead");
 			Respawn();
