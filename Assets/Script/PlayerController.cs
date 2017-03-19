@@ -35,7 +35,6 @@ public class PlayerController : Photon.MonoBehaviour {
 
 	[SerializeField] private GameObject[] resPawnPoint;
 
-
 	// Use this for initialization
 	void Start () {
 		targetLife = startTargetLife;
@@ -98,6 +97,11 @@ public class PlayerController : Photon.MonoBehaviour {
 			}
 		}
 	}
+
+    public void CameraStart()
+    {
+        camerafv.enabled = true;
+    }
 
 	void Reload() {
 		if(bullet < startBullet && bulletBox > 0) {

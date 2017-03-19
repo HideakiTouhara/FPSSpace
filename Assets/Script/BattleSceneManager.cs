@@ -14,17 +14,21 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 	private int standbyedCount, entryOrder;
 	readonly string standbyedCountKey = "StandbyedCount";
 
+	[SerializeField] private GameObject preparationCamera;
+
 	// Use this for initialization
 	private void Start () {
 		var hash = PhotonNetwork.room.customProperties;
-		if(hash.ContainsKey(standbyedCountKey)) 
+		if(hash.ContainsKey(standbyedCountKey))
 		{
 			int currentReadyCount = (int)hash[standbyedCountKey];
+		    print(currentReadyCount);
 			entryOrder = currentReadyCount;
 			currentReadyCount += 1;
 			hash[standbyedCountKey] = currentReadyCount;
 			PhotonNetwork.room.SetCustomProperties(hash);
-			if(currentReadyCount == PhotonNetwork.room.playerCount)
+//			print(currentReadyCount + "/" + PhotonNetwork.room.playerCount);
+			if(currentReadyCount == PhotonNetwork.room.playerCount - 1)
 			{
 				CreateCharacter();
 				gameStart = true;
@@ -36,13 +40,14 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 			PhotonNetwork.room.SetCustomProperties(hash);
 		}
 	}
-	
-	// Update is called once per frame
+
+//	 Update is called once per frame
 	void Update () {
 		if(!gameStart)
 		{
 			var hash = PhotonNetwork.room.customProperties;
 			int currentReadyCount = (int)hash[standbyedCountKey];
+//			print(currentReadyCount + "/" + PhotonNetwork.room.playerCount);
 			if(currentReadyCount == PhotonNetwork.room.playerCount)
 			{
 				CreateCharacter();
@@ -53,8 +58,11 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 
 	private void CreateCharacter()
 	{
+	    preparationCamera.gameObject.SetActive(false);
 		GameObject character = PhotonNetwork.Instantiate("FPSController", spawnPoints[entryOrder].position, spawnPoints[entryOrder].rotation, 0);
 		character.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 		character.GetComponentInChildren<AudioListener>().enabled = true;
+	    var playerController = character.GetComponent<PlayerController>();
+	    playerController.CameraStart();
 	}
 }
