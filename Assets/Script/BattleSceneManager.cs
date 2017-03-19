@@ -60,6 +60,7 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 	{
 	    preparationCamera.gameObject.SetActive(false);
 		GameObject character = PhotonNetwork.Instantiate("FPSController", spawnPoints[entryOrder].position, spawnPoints[entryOrder].rotation, 0);
+	    character.name = "MyPlayer";
 		character.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = true;
 		character.GetComponentInChildren<AudioListener>().enabled = true;
 	    var playerController = character.GetComponent<PlayerController>();
