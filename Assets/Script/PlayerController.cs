@@ -44,58 +44,60 @@ public class PlayerController : Photon.MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+	    if (photonView.isMine)
+	    {
+	        if(Input.GetMouseButtonDown(0) && shotInterval > coolTime) {
+	            shotInterval = 0;
+	            Ray ray = new Ray(camerafv.transform.position, camerafv.transform.forward);
+	            RaycastHit hit;
+	            GameObject sparkele3 = Instantiate(sparkle);
+	            sparkele3.transform.position = gunPoint.transform.position;
+	            sparkele3.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+	            Destroy(sparkele3, 0.1f);
+	            audioSource.PlayOneShot(audioClip);
+	            bullet -= 1;
+	            if(Physics.Raycast(ray, out hit) && bullet != 0) {
+	                GameObject sparkele2 = Instantiate(sparkle);
+	                sparkele2.transform.position = hit.point + new Vector3(0, 0, -0.3f);
+	                sparkele2.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+	                Destroy(sparkele2, 0.1f);
 
-		if(Input.GetMouseButtonDown(0) && shotInterval > coolTime) {
-			shotInterval = 0;
-			Ray ray = new Ray(camerafv.transform.position, camerafv.transform.forward);
-			RaycastHit hit;
-			GameObject sparkele3 = Instantiate(sparkle);
-			sparkele3.transform.position = gunPoint.transform.position;
-			sparkele3.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-			Destroy(sparkele3, 0.1f);
-			audioSource.PlayOneShot(audioClip);
-			bullet -= 1;
-			if(Physics.Raycast(ray, out hit) && bullet != 0) {
-				GameObject sparkele2 = Instantiate(sparkle);
-				sparkele2.transform.position = hit.point + new Vector3(0, 0, -0.3f);
-				sparkele2.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-				Destroy(sparkele2, 0.1f);
+	                if(hit.collider.name == "pCube1" || hit.collider.name == "pCylinder1") {
+	                    targetLife -= 1;
+	                    CalcScore(hit.point);
+	                }
+	                if(targetLife == 0) {
+	                    targetController.brokenTarget();
+	                    targetLife = startTargetLife;
+	                }
+	                if(hit.transform.tag == "Player") {
+	                    var myView = GetComponent<PhotonView>();
+	                    var otherView = hit.transform.GetComponent<PhotonView>();
+	                    int damage = 20;
+	                    if(otherView.ownerId == PhotonNetwork.player.ID) {
+	                        otherView.RPC("ReceiveDamage", PhotonPlayer.Find(otherView.ownerId), damage);
+	                    }
+	                }
+	            }
+	        }
+	        shotInterval += Time.deltaTime;
 
-				if(hit.collider.name == "pCube1" || hit.collider.name == "pCylinder1") {
-					targetLife -= 1;
-					CalcScore(hit.point);
-				}
-				if(targetLife == 0) {
-					targetController.brokenTarget();
-					targetLife = startTargetLife;
-				}
-				if(hit.transform.tag == "Player") {
-					var myView = GetComponent<PhotonView>();
-					var otherView = hit.transform.GetComponent<PhotonView>();
-					int damage = 20;
-					if(otherView.ownerId == PhotonNetwork.player.ID) {
-						otherView.RPC("ReceiveDamage", PhotonPlayer.Find(otherView.ownerId), damage);
-					}
-				}
-			}
-		}
-		shotInterval += Time.deltaTime;
+	        if(Input.GetKeyDown(KeyCode.R)) {
+	            Reload();
+	        }
 
-		if(Input.GetKeyDown(KeyCode.R)) {
-			Reload();
-		}
-
-		if(Input.GetMouseButtonDown(1)) {
-			if(isSnipe == false) {
-				camerafv.fieldOfView = 30.0f;
-				snipe.SetActive(true);
-				isSnipe = true;
-			} else {
-				camerafv.fieldOfView = 64.4f;
-				snipe.SetActive(false);
-				isSnipe = false;
-			}
-		}
+	        if(Input.GetMouseButtonDown(1)) {
+	            if(isSnipe == false) {
+	                camerafv.fieldOfView = 30.0f;
+	                snipe.SetActive(true);
+	                isSnipe = true;
+	            } else {
+	                camerafv.fieldOfView = 64.4f;
+	                snipe.SetActive(false);
+	                isSnipe = false;
+	            }
+	        }
+	    }
 	}
 
     public void CameraStart()
