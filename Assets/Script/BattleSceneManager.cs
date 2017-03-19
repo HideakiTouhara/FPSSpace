@@ -28,7 +28,7 @@ public class BattleSceneManager : SingletonMonoBehaviour<BattleSceneManager> {
 			hash[standbyedCountKey] = currentReadyCount;
 			PhotonNetwork.room.SetCustomProperties(hash);
 //			print(currentReadyCount + "/" + PhotonNetwork.room.playerCount);
-			if(currentReadyCount == PhotonNetwork.room.playerCount - 1)
+			if(currentReadyCount == PhotonNetwork.room.playerCount)
 			{
 				CreateCharacter();
 				gameStart = true;
